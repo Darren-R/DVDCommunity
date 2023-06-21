@@ -3,13 +3,15 @@
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
+    public string Password { get; set; }
     public List<string> BorrowedMovies { get; set; }
 
-    public Member(string firstName, string lastName, string phoneNumber)
+    public Member(string firstName, string lastName, string phoneNumber, string password)
     {
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
+        Password = password;
         BorrowedMovies = new List<string>();
     }
 

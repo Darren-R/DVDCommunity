@@ -16,8 +16,8 @@ public class Program
         movieCollection.AddMovie(movie2);
         movieCollection.AddMovie(movie3);
 
-        Member darren = new Member("Darren", "R", "2345");
-        Member anna = new Member("Anna", "J", "56798");
+        Member darren = new Member("Darren", "R", "2345", "0000");
+        Member anna = new Member("Anna", "J", "56798", "0000");
 
         memberCollection.AddMember(darren);
         memberCollection.AddMember(anna);
@@ -25,6 +25,55 @@ public class Program
         bool run = true;
         while (run)
         {
+
+            Console.WriteLine("===========================================");
+            Console.WriteLine("COMMUNITY LIBRARY AND DVD MANAGEMENT SYSTEM");
+            Console.WriteLine("===========================================\n");
+
+            Console.WriteLine("Main Menu");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Select from the following:\n");
+
+            Console.WriteLine("1. Staff");
+            Console.WriteLine("2. Member");
+            Console.WriteLine("0. Exit");
+
+            Console.Write("Enter your choice ==> ");
+            string input = Console.ReadLine();
+            int option;
+
+            if (int.TryParse(input, out option))
+            {
+                switch (option)
+                {
+                    case 1:
+                        if (UserVerification.VerifyIdentity("Staff"))
+                        {
+                            StaffMenu(movieCollection);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid staff credentials.");
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("You selected Member.");
+                        break;
+                    case 0:
+                        run = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection. Please enter 1 for Staff, 2 for Member or 0 to Exit.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Invalid input. {input} is not a valid integer. Please enter 1 for Staff, 2 for Member or 0 to Exit.");
+            }
+
+
+            /*
             Console.WriteLine("Please select an option:");
             Console.WriteLine("1. Register a new member");
             Console.WriteLine("2. Print existing members");
@@ -77,57 +126,7 @@ public class Program
                     }
                     break;
 
-                case 3:
-                    Console.WriteLine("Enter movie title:");
-                    string title = Console.ReadLine();
-
-                    Genre genre = Genre.Other;
-                    while (true)
-                    {
-                        Console.WriteLine("Enter movie genre:");
-                        string genreInput = Console.ReadLine();
-                        if (Enum.TryParse(genreInput, true, out Genre parsedGenre))
-                        {
-                            genre = parsedGenre;
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid genre. Please enter a valid genre.");
-                        }
-                    }
-
-                    Classification classification = Classification.General;
-                    while (true)
-                    {
-                        Console.WriteLine("Enter movie classification:");
-                        string classificationInput = Console.ReadLine();
-                        if (Enum.TryParse(classificationInput, true, out Classification parsedClassification))
-                        {
-                            classification = parsedClassification;
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid classification. Please enter a valid classification.");
-                        }
-                    }
-
-                    Console.WriteLine("Enter movie duration in minutes:");
-                    int duration = int.Parse(Console.ReadLine());
-
-                    Movie newMovie = new Movie(title, genre, classification, duration);
-                    movieCollection.AddMovie(newMovie);
-                    if (movieCollection.AddMovie(newMovie))
-                    {
-                        Console.WriteLine($"Movie {title} added successfully.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Movie {title} not added.");
-                    }
-                    break;
-
+         
                 case 4:
                     Console.WriteLine("Enter member's first name:");
                     firstName = Console.ReadLine();
@@ -187,6 +186,222 @@ public class Program
                 case 6:
                     run = false;
                     break;
+            }*/
+        }
+
+        static void StaffMenu(MovieCollection movieCollection)
+        {
+            while (true)
+            {
+                Console.WriteLine("\nStaff Menu:");
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine("1. Add DVD's of a new movie to the system");
+                Console.WriteLine("2. Add DVD's of an existing movie to the system");
+                Console.WriteLine("3. Remove a DVD from the system");
+                Console.WriteLine("4. Register a new member to the system");
+                Console.WriteLine("5. Remove a registered member from the system");
+                Console.WriteLine("6. Find a member's contact phone number given the member's name");
+                Console.WriteLine("7. Find member's who are currently renting a particular movie");
+                Console.WriteLine("0. Return to Main Menu");
+
+                string input = Console.ReadLine();
+
+                int option;
+                if (int.TryParse(input, out option))
+                {
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter movie title:");
+                            string title = Console.ReadLine();
+
+                            Genre genre = Genre.Other;
+                            while (true)
+                            {
+                                Console.WriteLine("Enter movie genre:");
+                                string genreInput = Console.ReadLine();
+                                if (Enum.TryParse(genreInput, true, out Genre parsedGenre))
+                                {
+                                    genre = parsedGenre;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid genre. Please enter a valid genre.");
+                                }
+                            }
+
+                            Classification classification = Classification.General;
+                            while (true)
+                            {
+                                Console.WriteLine("Enter movie classification:");
+                                string classificationInput = Console.ReadLine();
+                                if (Enum.TryParse(classificationInput, true, out Classification parsedClassification))
+                                {
+                                    classification = parsedClassification;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid classification. Please enter a valid classification.");
+                                }
+                            }
+
+                            Console.WriteLine("Enter movie duration in minutes:");
+                            int duration = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Enter the number of DVD's to be added");
+                            int copies = int.Parse(Console.ReadLine());
+
+                            Movie newMovie = new Movie(title, genre, classification, duration, copies);
+                            //movieCollection.AddMovie(newMovie);
+                            if (movieCollection.AddMovie(newMovie))
+                            {
+                                Console.WriteLine($"Movie {title} added successfully.");
+                                movieCollection.PrintMovies();
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Movie {title} not added.");
+                            }
+                            break;
+
+                        case 2:
+                            Console.WriteLine("Existing: ");
+                            movieCollection.PrintMovies();
+
+                            Console.WriteLine("Enter movie title:");
+                            string existingTitle = Console.ReadLine();
+
+                            Console.WriteLine("Enter number of copies to add:");
+                            int newCopies = int.Parse(Console.ReadLine());
+
+                            if (movieCollection.AddCopiesToExistingMovie(existingTitle, newCopies))
+                            {
+                                Console.WriteLine($"Copies of movie {existingTitle} added successfully.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Failed to add copies of movie {existingTitle}.");
+                            }
+                            break;
+
+                        case 3:
+                            Console.WriteLine("Existing: ");
+                            movieCollection.PrintMovies();
+
+                            Console.WriteLine("Enter movie title: ");
+                            string titleToRemove = Console.ReadLine();
+                            Console.WriteLine("Enter number of copies to remove");
+                            int copiesToRemove = int.Parse(Console.ReadLine());
+                            movieCollection.Remove(titleToRemove, copiesToRemove);
+
+                            break;
+
+                        case 4:
+                            Console.WriteLine("Enter member's first name:");
+                            string addingFirstName = Console.ReadLine();
+                            Console.WriteLine("Enter member's last name:");
+                            string addingLastName = Console.ReadLine();
+                            Console.WriteLine("Enter member's phone number:");
+                            string phoneNumber = Console.ReadLine();
+                            Console.WriteLine("Enter a four-digit password for the member:");
+                            string password = Console.ReadLine();
+
+                            if (string.IsNullOrEmpty(addingFirstName) || string.IsNullOrEmpty(addingLastName) || string.IsNullOrEmpty(phoneNumber) || string.IsNullOrEmpty(password))
+                            {
+                                Console.WriteLine("First name, last name, phone number and password cannot be null.\n");
+                            }
+                            else if (!int.TryParse(phoneNumber, out _) || (password.Length != 4) || !int.TryParse(password, out _))
+                            {
+                                Console.WriteLine("Phone number and password must be valid numbers. The password must be exactly four digits.\n");
+                            }
+                            else
+                            {
+                                Member newMember = new Member(addingFirstName, addingLastName, phoneNumber, password);
+                                memberCollection.AddMember(newMember);
+                                Console.WriteLine($"Member {addingFirstName} {addingLastName} added successfully.");
+                            }
+
+                            break;
+
+                        case 5:
+                            Console.WriteLine("Enter member's first name:");
+                            string removingFirstName = Console.ReadLine();
+                            Console.WriteLine("Enter member's last name:");
+                            string removingLastName = Console.ReadLine();
+
+                            Member memberToRemove = memberCollection.FindMember(removingFirstName, removingLastName);
+
+                            if (memberToRemove != null)
+                            {
+                                if (memberCollection.RemoveMember(memberToRemove))
+                                {
+                                    Console.WriteLine($"Member {removingFirstName} {removingLastName} removed successfully.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Error removing member {removingFirstName} {removingLastName}.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Member {removingFirstName} {removingLastName} not found.");
+                            }
+
+                            break;
+
+                        case 6:
+                            Console.WriteLine("Enter member's first name:");
+                            string firstName = Console.ReadLine();
+                            Console.WriteLine("Enter member's last name:");
+                            string lastName = Console.ReadLine();
+
+                            Member memberToFind = memberCollection.FindMember(firstName, lastName);
+                            if (memberToFind != null)
+                            {
+                                Console.WriteLine($"Member {firstName} {lastName}'s phone number: {memberToFind.PhoneNumber}");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Member {firstName} {lastName} not found.");
+                            }
+
+                            break;
+
+                        case 7:
+                            Console.WriteLine("Enter the title of the movie:");
+                            string movieTitle = Console.ReadLine();
+
+                            List<Member> membersWithMovie = memberCollection.FindMembersWithMovie(movieTitle); // You'll need to implement this method
+
+                            if (membersWithMovie.Count > 0)
+                            {
+                                Console.WriteLine($"Members currently renting {movieTitle}:");
+                                foreach (Member member in membersWithMovie)
+                                {
+                                    Console.WriteLine($"{member.FirstName} {member.LastName}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"No members are currently renting {movieTitle}.");
+                            }
+
+                            break;
+
+                        case 0:
+                            Console.WriteLine("Returning to Main Menu...");
+                            return;
+                        default:
+                            Console.WriteLine("Invalid selection. Please enter 1 for Task 1, 2 for Task 2 or 0 to Return to Main Menu.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid input. {input} is not a valid. Please enter 1 for Task 1, 2 for Task 2 or 0 to Return to Main Menu.");
+                }
             }
         }
     }

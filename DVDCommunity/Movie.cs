@@ -24,12 +24,19 @@ public class Movie
     public Genre Genre { get; set; }
     public Classification Classification { get; set; }
     public int Duration { get; set; }
+    public int Copies { get; set; }
 
-    public Movie(string title, Genre genre, Classification classification, int duration)
+    public Movie(string title, Genre genre, Classification classification, int duration, int copies = 1)
     {
         Title = title;
         Genre = genre;
         Classification = classification;
         Duration = duration;
+        Copies = copies;
+    }
+
+    public void AddCopies(int copies)
+    {
+        Copies += copies;
     }
 }

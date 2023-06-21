@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/darren/Desktop/DVDCommunity/DVDCommunity/DVDCommunity.csproj": {}
+    "/Users/darren/Documents/DVDCommunity/DVDCommunity/DVDCommunity.csproj": {}
   },
   "projects": {
-    "/Users/darren/Desktop/DVDCommunity/DVDCommunity/DVDCommunity.csproj": {
+    "/Users/darren/Documents/DVDCommunity/DVDCommunity/DVDCommunity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/darren/Desktop/DVDCommunity/DVDCommunity/DVDCommunity.csproj",
+        "projectUniqueName": "/Users/darren/Documents/DVDCommunity/DVDCommunity/DVDCommunity.csproj",
         "projectName": "DVDCommunity",
-        "projectPath": "/Users/darren/Desktop/DVDCommunity/DVDCommunity/DVDCommunity.csproj",
+        "projectPath": "/Users/darren/Documents/DVDCommunity/DVDCommunity/DVDCommunity.csproj",
         "packagesPath": "/Users/darren/.nuget/packages/",
-        "outputPath": "/Users/darren/Desktop/DVDCommunity/DVDCommunity/obj/",
+        "outputPath": "/Users/darren/Documents/DVDCommunity/DVDCommunity/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/darren/.nuget/NuGet/NuGet.Config"

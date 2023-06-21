@@ -65,4 +65,21 @@
         }
         return null;
     }
+
+    public List<Member> FindMembersWithMovie(string movieTitle)
+    {
+        List<Member> membersWithMovie = new List<Member>();
+
+        foreach (Member member in members)
+        {
+            if (member != null && member.BorrowedMovies != null && member.BorrowedMovies.Contains(movieTitle))
+            {
+                membersWithMovie.Add(member);
+            }
+        }
+
+        return membersWithMovie;
+    }
+
+
 }

@@ -32,6 +32,42 @@
         return null;
     }
 
+    public bool AddCopiesToExistingMovie(string title, int copies)
+    {
+        Movie movie = FindMovie(title);
+        if (movie == null)
+        {
+            Console.WriteLine("Movie not found in the collection.");
+            return false;
+        }
+
+        if (_count + copies > MAX_MOVIES)
+        {
+            Console.WriteLine("Not enough space in the collection for the additional copies.");
+            return false;
+        }
+
+        movie.AddCopies(copies);
+        _count += copies;
+
+        return true;
+    }
+
+
+    public void PrintMovies()
+    {
+        foreach (LinkedList<KeyValue<string, Movie>> linkedList in _items)
+        {
+            if (linkedList != null)
+            {
+                foreach (KeyValue<string, Movie> item in linkedList)
+                {
+                    Console.WriteLine($"Title: {item.Key}, Copies: {item.Value.Copies}");
+                }
+            }
+        }
+    }
+
     public bool AddMovie(Movie movie)
     {
         if (FindMovie(movie.Title) != null)
@@ -53,30 +89,51 @@
         return true;
     }
 
-    public bool RemoveMovie(string title)
+
+    public bool Remove(string title, int copiesToRemove = 1)
     {
         int position = GetArrayPosition(title);
         LinkedList<KeyValue<string, Movie>> linkedList = GetLinkedList(position);
         bool itemFound = false;
-        KeyValue<string, Movie> foundItem = default(KeyValue<string, Movie>);
-        foreach (KeyValue<string, Movie> item in linkedList)
+        int removedCopies = 0;
+        LinkedListNode<KeyValue<string, Movie>> currentNode = linkedList.First;
+
+        while (currentNode != null && removedCopies < copiesToRemove)
         {
-            if (item.Key.Equals(title))
+            if (currentNode.Value.Key.Equals(title))
             {
                 itemFound = true;
-                foundItem = item;
+                LinkedListNode<KeyValue<string, Movie>> nextNode = currentNode.Next;
+                linkedList.Remove(currentNode);
+                currentNode = nextNode;
+                removedCopies++;
+                _count--;
+            }
+            else
+            {
+                currentNode = currentNode.Next;
             }
         }
 
         if (itemFound)
         {
-            linkedList.Remove(foundItem);
-            _count--;
+            if (removedCopies > 1)
+            {
+                Console.WriteLine($"{removedCopies} copies of {title} have been removed.");
+            }
+            else
+            {
+                Console.WriteLine($"{removedCopies} copy of {title} has been removed.");
+            }
             return true;
         }
-
-        return false;
+        else
+        {
+            Console.WriteLine($"The movie {title} was not found in the collection.");
+            return false;
+        }
     }
+
 
     protected LinkedList<KeyValue<string, Movie>> GetLinkedList(int position)
     {
