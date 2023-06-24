@@ -6,6 +6,10 @@
         public TValue Value;
     }
 
+    public int Count { get; protected set; }
+
+    public int Capacity { get; protected set; }
+
     protected Entry?[] hashTable;
 
     public HashTable(int capacity)
@@ -13,10 +17,6 @@
         this.Capacity = capacity;
         this.hashTable = new Entry?[capacity];
     }
-
-    public int Count { get; protected set; }
-
-    public int Capacity { get; protected set; }
 
     public TValue Search(TKey key)
     {
@@ -46,12 +46,6 @@
             }
         }
         throw new KeyNotFoundException($"The given key '{key}' was not present in the hash table.");
-    }
-
-    public void Clear()
-    {
-        this.hashTable = new Entry?[Capacity];
-        this.Count = 0;
     }
 
     public void Insert(TKey key, TValue value)
