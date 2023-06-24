@@ -510,7 +510,6 @@ public class Program
                                 Console.WriteLine("Member not found.\n");
                                 break;
                             }
-
                             Console.WriteLine("Enter title of movie to return:");
                             string returnMovieTitle = Console.ReadLine();
 
@@ -519,9 +518,49 @@ public class Program
                                 Console.WriteLine($"{returningMember.FirstName} {returningMember.LastName} has returned {returnMovieTitle}.\n");
                             }
                             break;
+
                         case 5:
-                            Console.WriteLine("Task 5");
-                            break;
+                            Console.WriteLine("Enter first name:");
+                            string currentBorrowFirstName = Console.ReadLine();
+
+                            Console.WriteLine("Enter last name:");
+                            string currentBorrowLastName = Console.ReadLine();
+
+                            Member currentBorrowMember = memberCollection.FindMember(currentBorrowFirstName, currentBorrowLastName);
+                            if (currentBorrowMember == null)
+                            {
+                                Console.WriteLine("Member not found.\n");
+                                break;
+                            }
+                            else
+                            {
+                                Console.Write("Enter your 4 digit pincode: ");
+                                string pin = Console.ReadLine();
+                                if (pin == currentBorrowMember.Password)
+                                {
+                                    if (currentBorrowMember.BorrowedMovies.Count == 0)
+                                    {
+                                        Console.WriteLine("No borrowed movies.");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Borrowed Movies:");
+
+                                        foreach (string movieTitle in currentBorrowMember.BorrowedMovies)
+                                        {
+                                            Console.WriteLine(movieTitle);
+                                        }
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Incorrect PIN");
+                                    break;
+                                }
+                            }
+
                         case 6:
                             Console.WriteLine("Task 6");
                             break;
