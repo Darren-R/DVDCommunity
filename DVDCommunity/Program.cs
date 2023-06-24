@@ -143,7 +143,6 @@ public class Program
                             int copies = int.Parse(Console.ReadLine());
 
                             Movie newMovie = new Movie(title, genre, classification, duration, copies);
-                            //movieCollection.AddMovie(newMovie);
                             if (movieCollection.AddMovie(newMovie))
                             {
                                 Console.WriteLine($"Movie {title} added successfully.");
@@ -181,9 +180,10 @@ public class Program
 
                             Console.WriteLine("Enter movie title: ");
                             string titleToRemove = Console.ReadLine();
+                            /*
                             Console.WriteLine("Enter number of copies to remove");
-                            int copiesToRemove = int.Parse(Console.ReadLine());
-                            movieCollection.Remove(titleToRemove, copiesToRemove);
+                            int copiesToRemove = int.Parse(Console.ReadLine());*/
+                            movieCollection.RemoveMovie(titleToRemove);
 
                             break;
 

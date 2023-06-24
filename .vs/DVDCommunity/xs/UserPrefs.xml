@@ -1,20 +1,30 @@
 ﻿<Properties StartupConfiguration="{EAC919B5-4BCC-4785-A60D-03AF6C5C2A2E}|Default">
-  <MonoDevelop.Ide.ItemProperties.DVDCommunity PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DVDCommunity/MemberCollection.cs">
+    <Files>
+      <File FileName="DVDCommunity/Program.cs" Line="18" Column="42" />
+      <File FileName="DVDCommunity/MovieCollection.cs" Line="33" Column="6" />
+      <File FileName="DVDCommunity/Movie.cs" Line="29" Column="88" />
+      <File FileName="DVDCommunity/UserVerification.cs" Line="18" Column="1" />
+      <File FileName="DVDCommunity/MemberCollection.cs" Line="34" Column="42" />
+      <File FileName="DVDCommunity/Member.cs" Line="50" Column="6" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DVDCommunity" expanded="True">
-            <Node name="DVDCommunity" expanded="True" selected="True" />
+            <Node name="DVDCommunity" expanded="True">
+              <Node name="MemberCollection.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.DVDCommunity PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
