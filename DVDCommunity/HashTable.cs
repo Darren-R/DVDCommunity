@@ -79,12 +79,11 @@
             if (hashTable[i] != null)
             {
                 Movie movie = hashTable[i].Value.Value as Movie;
-                if (movie != null)
+                if (movie != null && movie.Copies > 0)
                 {
                     Console.WriteLine($"Title: {movie.Title}, Copies: {movie.Copies}");
                 }
             }
         }
     }
-
 }

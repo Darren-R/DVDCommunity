@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.VisualBasic.FileIO;
-
-public class Program
+﻿public class Program
 {
     private static MemberCollection memberCollection = new MemberCollection(10);
 
@@ -367,7 +364,7 @@ public class Program
                                         Console.WriteLine("Movie not found.\n");
                                         break;
                                     }
-                                    if (borrwingMember.BorrowMovie(movieBorrowTitle))
+                                    if (borrwingMember.BorrowMovie(movieBorrowTitle, movieCollection))
                                     {
                                         Console.WriteLine($"{borrwingMember.FirstName} {borrwingMember.LastName} has borrowed {movieBorrowTitle}.\n");
                                     }
@@ -400,7 +397,7 @@ public class Program
                             Console.WriteLine("Enter title of movie to return:");
                             string returnMovieTitle = Console.ReadLine();
 
-                            if (returningMember.ReturnMovie(returnMovieTitle))
+                            if (returningMember.ReturnMovie(returnMovieTitle, movieCollection))
                             {
                                 Console.WriteLine($"{returningMember.FirstName} {returningMember.LastName} has returned {returnMovieTitle}.\n");
                             }
@@ -449,15 +446,21 @@ public class Program
                             }
 
                         case 6:
-                            Console.WriteLine("Task 6");
                             var topMovies = memberCollection.GetTopMovies(3);
-
-                            foreach (var movie in topMovies)
+                            if (topMovies.Count == 0)
                             {
-                                Console.WriteLine($"Movie: {movie.Key}, Rented: {movie.Value} times");
+                                Console.WriteLine("No movies are currently rented.");
+                                break;
+                            }
+                            else
+                            {
+                                foreach (var movie in topMovies)
+                                {
+                                    Console.WriteLine($"Movie: {movie.Key}, Rented: {movie.Value} times");
+                                }
+                                break;
                             }
 
-                            break;
                         case 0:
                             Console.WriteLine("Returning to Main Menu...");
                             return;

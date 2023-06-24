@@ -15,7 +15,7 @@
         BorrowedMovies = new List<string>();
     }
 
-    public bool BorrowMovie(string dvdTitle)
+    public bool BorrowMovie(string dvdTitle, MovieCollection movieCollection)
     {
         if (BorrowedMovies.Count >= 5)
         {
@@ -29,18 +29,37 @@
         }
         else
         {
-            BorrowedMovies.Add(dvdTitle);
-            return true;
-            //For testing Console.WriteLine("You have succesfully borrowed " + dvdTitle);
+            Movie? movie = movieCollection.FindMovie(dvdTitle);
+            if (movie != null && movie.Copies > 0)
+            {
+                BorrowedMovies.Add(dvdTitle);
+                movie.Copies--;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The movie is currently unavailable.");
+                return false;
+            }
         }
     }
 
-    public bool ReturnMovie(string dvdTitle)
+    public bool ReturnMovie(string dvdTitle, MovieCollection movieCollection)
     {
         if (BorrowedMovies.Contains(dvdTitle))
         {
             BorrowedMovies.Remove(dvdTitle);
-            return true;
+            Movie? movie = movieCollection.FindMovie(dvdTitle);
+            if (movie != null)
+            {
+                movie.Copies++;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("This movie doesn't exist in the collection. Please check the movie title.");
+                return false;
+            }
         }
         else
         {

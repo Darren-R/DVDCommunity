@@ -96,14 +96,39 @@
                     {
                         movieCount[movie]++;
                     }
-                    else
+                    else if (movieCount.Count < topCount)
                     {
                         movieCount.Add(movie, 1);
+                    }
+                    else
+                    {
+                        string minMovie = null;
+                        int minCount = int.MaxValue;
+
+                        foreach (var pair in movieCount)
+                        {
+                            if (pair.Value < minCount)
+                            {
+                                minMovie = pair.Key;
+                                minCount = pair.Value;
+                            }
+                        }
+
+                        movieCount[minMovie]--;
+                        if (movieCount[minMovie] == 0)
+                        {
+                            movieCount.Remove(minMovie);
+                        }
                     }
                 }
             }
         }
 
-        return movieCount.OrderByDescending(m => m.Value).Take(topCount).ToDictionary(pair => pair.Key, pair => pair.Value);
+        var sortedMovieCount = new Dictionary<string, int>();
+        foreach (var pair in movieCount.OrderByDescending(m => m.Value))
+        {
+            sortedMovieCount.Add(pair.Key, pair.Value);
+        }
+        return sortedMovieCount;
     }
 }
