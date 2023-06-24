@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.VisualBasic.FileIO;
 
 public class Program
 {
@@ -57,7 +58,8 @@ public class Program
                         }
                         break;
                     case 2:
-                        Console.WriteLine("You selected Member.");
+                        Console.WriteLine("You Selected member");
+                        MemberMenu();
                         break;
                     case 0:
                         run = false;
@@ -394,13 +396,66 @@ public class Program
                             Console.WriteLine("Returning to Main Menu...");
                             return;
                         default:
-                            Console.WriteLine("Invalid selection. Please enter 1 for Task 1, 2 for Task 2 or 0 to Return to Main Menu.");
+                            Console.WriteLine("Invalid selection. Please input an option from task list or 0 to Return to Main Menu.");
                             break;
                     }
                 }
                 else
                 {
                     Console.WriteLine($"Invalid input. {input} is not a valid. Please enter 1 for Task 1, 2 for Task 2 or 0 to Return to Main Menu.");
+                }
+            }
+        }
+        static void MemberMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nMember Menu");
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine("1. Browse all movies");
+                Console.WriteLine("2. Display all the information about a movie, given the title of the movie");
+                Console.WriteLine("3. Borrow a movie DVD");
+                Console.WriteLine("4. Return a borrowed DVD");
+                Console.WriteLine("5. List current borrowing movies");
+                Console.WriteLine("6. Display the top 3 movies rented by the members");
+                Console.WriteLine("0. Return to main menu");
+
+                string input = Console.ReadLine();
+
+                int option;
+                if (int.TryParse(input, out option))
+                {
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("Task 1");
+                            break;
+                        case 2:
+                            Console.WriteLine("Task 2");
+                            break;
+                        case 3:
+                            Console.WriteLine("Task 3");
+                            break;
+                        case 4:
+                            Console.WriteLine("Task 4");
+                            break;
+                        case 5:
+                            Console.WriteLine("Task 5");
+                            break;
+                        case 6:
+                            Console.WriteLine("Task 6");
+                            break;
+                        case 0:
+                            Console.WriteLine("Returning to Main Menu...");
+                            return;
+                        default:
+                            Console.WriteLine("Invalid selection. Please input an option from task list or 0 to Return to Main Menu.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid input. {input} is not a valid. Please input an option from task list or 0 to Return to Main Menu.");
                 }
             }
         }
