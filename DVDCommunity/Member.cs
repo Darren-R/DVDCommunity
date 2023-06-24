@@ -44,7 +44,7 @@
         }
         else
         {
-            Console.WriteLine("You are not currently renting that Dvd");
+            Console.WriteLine("You are not currently renting that movie");
             return false;
         }
     }

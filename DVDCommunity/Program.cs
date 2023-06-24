@@ -59,7 +59,7 @@ public class Program
                         break;
                     case 2:
                         Console.WriteLine("You Selected member");
-                        MemberMenu();
+                        MemberMenu(movieCollection);
                         break;
                     case 0:
                         run = false;
@@ -406,7 +406,7 @@ public class Program
                 }
             }
         }
-        static void MemberMenu()
+        static void MemberMenu(MovieCollection movieCollection)
         {
             while (true)
             {
@@ -428,16 +428,96 @@ public class Program
                     switch (option)
                     {
                         case 1:
-                            Console.WriteLine("Task 1");
+                            Console.WriteLine("\nPlease see the existing movies and number of DVD's in stock:");
+                            movieCollection.PrintMovies();
                             break;
+
                         case 2:
-                            Console.WriteLine("Task 2");
-                            break;
+                            Console.WriteLine("Enter title of movie to view:");
+                            string movieInfoTitle = Console.ReadLine();
+                            Movie movieInfo = movieCollection.FindMovie(movieInfoTitle);
+                            if (movieInfo == null)
+                            {
+                                Console.WriteLine("Movie not found.\n");
+                                break;
+                            }
+                            else
+                            {
+                                Console.Write("\n");
+                                Console.WriteLine($"Title: {movieInfo.Title}");
+                                Console.WriteLine($"Genre: {movieInfo.Genre}");
+                                Console.WriteLine($"Classification: {movieInfo.Classification}");
+                                Console.WriteLine($"Running Time: {movieInfo.Duration}");
+                                Console.WriteLine($"Available Copies: {movieInfo.Copies}");
+                                break;
+                            }
+
                         case 3:
-                            Console.WriteLine("Task 3");
-                            break;
+                            Console.WriteLine("Enter member's first name:");
+                            string firstName = Console.ReadLine();
+
+                            Console.WriteLine("Enter member's last name:");
+                            string lastName = Console.ReadLine();
+
+                            Member borrwingMember = memberCollection.FindMember(firstName, lastName);
+                            if (borrwingMember == null)
+                            {
+                                Console.WriteLine("Member not found.\n");
+                                break;
+                            }
+                            else
+                            {
+                                Console.Write("Enter your 4 digit pincode: ");
+                                string pin = Console.ReadLine();
+                                if (pin == borrwingMember.Password)
+                                {
+                                    Console.WriteLine("Enter title of movie to borrow:");
+                                    string movieBorrowTitle = Console.ReadLine();
+
+                                    Movie movie = movieCollection.FindMovie(movieBorrowTitle);
+                                    if (movie == null)
+                                    {
+                                        Console.WriteLine("Movie not found.\n");
+                                        break;
+                                    }
+                                    if (borrwingMember.BorrowMovie(movieBorrowTitle))
+                                    {
+                                        Console.WriteLine($"{borrwingMember.FirstName} {borrwingMember.LastName} has borrowed {movieBorrowTitle}.\n");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"{borrwingMember.FirstName} did not borrow {movieBorrowTitle}\n");
+                                    }
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Incorrect PIN");
+                                    break;
+                                }
+                            }
+
                         case 4:
-                            Console.WriteLine("Task 4");
+                            Console.WriteLine("Enter first name:");
+                            string returnFirstName = Console.ReadLine();
+
+                            Console.WriteLine("Enter last name:");
+                            string returnLastName = Console.ReadLine();
+
+                            Member returningMember = memberCollection.FindMember(returnFirstName, returnLastName);
+                            if (returningMember == null)
+                            {
+                                Console.WriteLine("Member not found.\n");
+                                break;
+                            }
+
+                            Console.WriteLine("Enter title of movie to return:");
+                            string returnMovieTitle = Console.ReadLine();
+
+                            if (returningMember.ReturnMovie(returnMovieTitle))
+                            {
+                                Console.WriteLine($"{returningMember.FirstName} {returningMember.LastName} has returned {returnMovieTitle}.\n");
+                            }
                             break;
                         case 5:
                             Console.WriteLine("Task 5");
