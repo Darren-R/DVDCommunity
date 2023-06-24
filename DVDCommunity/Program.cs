@@ -90,6 +90,7 @@
                 Console.WriteLine("7. Find member's who are currently renting a particular movie");
                 Console.WriteLine("0. Return to Main Menu");
 
+                Console.Write("\nEnter your choice ==> ");
                 string input = Console.ReadLine();
 
                 int option;
@@ -143,7 +144,6 @@
                             if (movieCollection.AddMovie(newMovie))
                             {
                                 Console.WriteLine($"Movie {title} added successfully.");
-                                movieCollection.PrintMovies();
                             }
                             else
                             {
@@ -286,7 +286,7 @@
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid input. {input} is not a valid. Please enter 1 for Task 1, 2 for Task 2 or 0 to Return to Main Menu.");
+                    Console.WriteLine($"Invalid input. {input} is not a valid. Please input an option from task list or 0 to Return to Main Menu.");
                 }
             }
         }
@@ -304,6 +304,7 @@
                 Console.WriteLine("6. Display the top 3 movies rented by the members");
                 Console.WriteLine("0. Return to main menu");
 
+                Console.Write("\nEnter your choice ==> ");
                 string input = Console.ReadLine();
 
                 int option;

@@ -62,8 +62,16 @@
         Movie? movie = FindMovie(title);
         if (movie != null)
         {
-            movieTable.Delete(title);
-            Console.WriteLine($"The movie {title} has been removed from the collection.");
+            if (movie.Copies > 1)
+            {
+                movie.Copies--;
+                Console.WriteLine($"One copy of the movie {title} has been removed from the collection.");
+            }
+            else
+            {
+                movieTable.Delete(title);
+                Console.WriteLine($"The movie {title} has been removed from the collection.");
+            }
             return true;
         }
         else
@@ -72,6 +80,7 @@
             return false;
         }
     }
+
 
     public int Count()
     {
