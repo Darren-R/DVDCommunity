@@ -29,7 +29,7 @@
             else if (hashTable[probe] == null)
                 return null;
         }
-        return null; // Not found
+        return null;
     }
 
     public void Delete(TKey key)
@@ -48,7 +48,6 @@
         throw new KeyNotFoundException($"The given key '{key}' was not present in the hash table.");
     }
 
-
     public void Clear()
     {
         this.hashTable = new Entry?[Capacity];
@@ -60,7 +59,7 @@
         if (this.Count >= this.Capacity)
             throw new InvalidOperationException("Hash table is full");
 
-        int hash = key.GetHashCode() % this.Capacity;
+        int hash = Math.Abs(key.GetHashCode()) % this.Capacity;
         for (int i = 0; i < this.Capacity; i++)
         {
             int probe = (hash + i) % this.Capacity;
@@ -79,8 +78,13 @@
         {
             if (hashTable[i] != null)
             {
-                Console.WriteLine($"Title: {hashTable[i].Value.Key}, Copies: {hashTable[i].Value}");
+                Movie movie = hashTable[i].Value.Value as Movie;
+                if (movie != null)
+                {
+                    Console.WriteLine($"Title: {movie.Title}, Copies: {movie.Copies}");
+                }
             }
         }
     }
+
 }
