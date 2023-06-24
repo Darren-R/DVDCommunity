@@ -7,15 +7,17 @@ public class Program
 
     public static void Main(string[] args)
     {
-        Movie movie1 = new Movie("Ghost in the Shell", Genre.SciFi, Classification.Mature, 82);
-        Movie movie2 = new Movie("Ong-Bak: Muay Thai Warrior", Genre.Action, Classification.General, 108);
-        Movie movie3 = new Movie("The Departed", Genre.Action, Classification.Restricted, 151);
+        Movie movie1 = new Movie("Ghost in the Shell", Genre.SciFi, Classification.Mature, 82, 5);
+        Movie movie2 = new Movie("Ong-Bak: Muay Thai Warrior", Genre.Action, Classification.General, 108, 4);
+        Movie movie3 = new Movie("The Departed", Genre.Action, Classification.Restricted, 151, 3);
+        Movie movie4 = new Movie("The Matrix", Genre.Action, Classification.Mature, 136);
 
         MovieCollection movieCollection = new MovieCollection();
 
         movieCollection.AddMovie(movie1);
         movieCollection.AddMovie(movie2);
         movieCollection.AddMovie(movie3);
+        movieCollection.AddMovie(movie4);
 
         Member darren = new Member("Darren", "R", "2345", "0000");
         Member anna = new Member("Anna", "J", "56798", "0000");
@@ -74,121 +76,6 @@ public class Program
                 Console.WriteLine($"Invalid input. {input} is not a valid integer. Please enter 1 for Staff, 2 for Member or 0 to Exit.");
             }
 
-
-            /*
-            Console.WriteLine("Please select an option:");
-            Console.WriteLine("1. Register a new member");
-            Console.WriteLine("2. Print existing members");
-            Console.WriteLine("3. Add a new movie");
-            Console.WriteLine("4. Borrow a movie");
-            Console.WriteLine("5. Return a movie");
-            Console.WriteLine("6. Exit");
-            int option = int.Parse(Console.ReadLine());
-            Console.WriteLine("");
-
-            switch (option)
-            {
-                case 1:
-                    Console.WriteLine("Enter member's first name:");
-                    string firstName = Console.ReadLine();
-                    Console.WriteLine("Enter member's last name:");
-                    string lastName = Console.ReadLine();
-                    Console.WriteLine("Enter member's phone number:");
-                    string phoneNumber = Console.ReadLine();
-
-                    if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(phoneNumber))
-                    {
-                        Console.WriteLine("First name, last name, and phone number cannot be null.\n");
-                    }
-                    else if (!int.TryParse(phoneNumber, out _))
-                    {
-                        Console.WriteLine("Phone number must be a valid number.\n");
-                    }
-                    else
-                    {
-                        Member newMember = new Member(firstName, lastName, phoneNumber);
-                        memberCollection.AddMember(newMember);
-                        Console.WriteLine($"Member {firstName} {lastName} added successfully.");
-                    }
-                    break;
-
-                case 2:
-                    Console.Write("Current members: ");
-                    if (memberCollection.MemberCount == 0)
-                    {
-                        Console.WriteLine("There are no current members");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < memberCollection.MemberCount; i++)
-                        {
-                            Member currentMember = memberCollection.GetMember(i);
-                            Console.WriteLine($"First Name: {currentMember.FirstName}, Last Name: {currentMember.LastName}, Phone Number: {currentMember.PhoneNumber}");
-                        }
-                    }
-                    break;
-
-         
-                case 4:
-                    Console.WriteLine("Enter member's first name:");
-                    firstName = Console.ReadLine();
-
-                    Console.WriteLine("Enter member's last name:");
-                    lastName = Console.ReadLine();
-
-                    Member borrwingMember = memberCollection.FindMember(firstName, lastName);
-                    if (borrwingMember == null)
-                    {
-                        Console.WriteLine("Member not found.\n");
-                        break;
-                    }
-
-                    Console.WriteLine("Enter title of movie to borrow:");
-                    string movieTitle = Console.ReadLine();
-
-                    Movie movie = movieCollection.FindMovie(movieTitle);
-                    if (movie == null)
-                    {
-                        Console.WriteLine("Movie not found.\n");
-                        break;
-                    }
-                    if (borrwingMember.BorrowMovie(movieTitle))
-                    {
-                        Console.WriteLine($"{borrwingMember.FirstName} {borrwingMember.LastName} has borrowed {movieTitle}.\n");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{borrwingMember.FirstName} did not borrow {movieTitle}\n");
-                    }
-                    break;
-
-                case 5:
-                    Console.WriteLine("Enter member's first name:");
-                    string returnFirstName = Console.ReadLine();
-
-                    Console.WriteLine("Enter member's last name:");
-                    string returnLastName = Console.ReadLine();
-
-                    Member returningMember = memberCollection.FindMember(returnFirstName, returnLastName);
-                    if (returningMember == null)
-                    {
-                        Console.WriteLine("Member not found.\n");
-                        break;
-                    }
-
-                    Console.WriteLine("Enter title of movie to return:");
-                    string returnMovieTitle = Console.ReadLine();
-
-                    if (returningMember.ReturnMovie(returnMovieTitle))
-                    {
-                        Console.WriteLine($"{returningMember.FirstName} {returningMember.LastName} has returned {returnMovieTitle}.\n");
-                    }
-                    break;
-
-                case 6:
-                    run = false;
-                    break;
-            }*/
         }
 
         static void StaffMenu(MovieCollection movieCollection)
@@ -563,6 +450,13 @@ public class Program
 
                         case 6:
                             Console.WriteLine("Task 6");
+                            var topMovies = memberCollection.GetTopMovies(3);
+
+                            foreach (var movie in topMovies)
+                            {
+                                Console.WriteLine($"Movie: {movie.Key}, Rented: {movie.Value} times");
+                            }
+
                             break;
                         case 0:
                             Console.WriteLine("Returning to Main Menu...");

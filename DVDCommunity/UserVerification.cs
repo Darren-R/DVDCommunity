@@ -12,11 +12,6 @@
         {
             return true;
         }
-        else if (userType == "Member") // Assume some logic to verify member credentials
-        {
-            // Verification logic here
-        }
-
         return false;
     }
 }

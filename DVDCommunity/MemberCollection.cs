@@ -17,6 +17,7 @@
         }
         return members[index];
     }
+
     public int MemberCount
     {
         get { return memberCount; }
@@ -81,5 +82,29 @@
         return membersWithMovie;
     }
 
+    public Dictionary<string, int> GetTopMovies(int topCount)
+    {
+        Dictionary<string, int> movieCount = new Dictionary<string, int>();
+
+        foreach (Member member in members)
+        {
+            if (member != null && member.BorrowedMovies != null)
+            {
+                foreach (string movie in member.BorrowedMovies)
+                {
+                    if (movieCount.ContainsKey(movie))
+                    {
+                        movieCount[movie]++;
+                    }
+                    else
+                    {
+                        movieCount.Add(movie, 1);
+                    }
+                }
+            }
+        }
+
+        return movieCount.OrderByDescending(m => m.Value).Take(topCount).ToDictionary(pair => pair.Key, pair => pair.Value);
+    }
 
 }
