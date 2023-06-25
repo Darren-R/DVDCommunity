@@ -259,7 +259,7 @@
                             Console.WriteLine("Enter the title of the movie:");
                             string movieTitle = Console.ReadLine();
 
-                            List<Member> membersWithMovie = memberCollection.FindMembersWithMovie(movieTitle); // You'll need to implement this method
+                            List<Member> membersWithMovie = memberCollection.FindMembersWithMovie(movieTitle);
 
                             if (membersWithMovie.Count > 0)
                             {
